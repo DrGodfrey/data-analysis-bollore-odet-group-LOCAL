@@ -1,0 +1,23 @@
+create new:
+[install if not already> pip install virtualenv]
+
+cd {project folder}
+	virtualenv venv		{can choose alternative name}
+
+activate:
+	venv\Scripts\activate
+
+install packages:
+	pip install package_name
+
+deactivate:
+	deactivate
+
+
+
+create requirements file:
+{in correct directory}
+	pip freeze > requirements.txt
+
+use a requirements file:
+	pip install -r requirements.txt

@@ -4,9 +4,22 @@ from credentials import *
 from datetime import datetime, timedelta
 import json
 import os
+import pymongo
+
+# Connect to MongoDB 
+try:
+    client = pymongo.MongoClient("mongodb://localhost:27017")
+    print("Connected at mongodb://localhost:27017")
+except:
+    print("Could not connect to MongoDB")
+
+
+db = client["bollore_analysis_db"]
+collection = db["timeseries_data_files"]     
 
 # from credentials
 my_api_key = alpha_vantage_api_key
+
 
 def main(maximum_stock_quote_age=86400):
     # Read the last update timestamp from the "last_update.txt" file
@@ -50,6 +63,11 @@ def save_data_for(ticker="TSCO.LON", my_api_key=my_api_key):
 
     current_directory = os.getcwd()
     file_name = f'{ticker.replace(".", "_")}.json'
+    
+    #---------------------
+    # to add data to DB:
+    collection.insert_one({"_id": file_name, "data": json_data})    
+    
     file_path = os.path.join(current_directory, "data", file_name )
     
     print(file_path)
@@ -61,5 +79,8 @@ def save_data_for(ticker="TSCO.LON", my_api_key=my_api_key):
 
 
 if __name__ == "__main__":
-    if (True):
+    if (False):
         main()
+    else:
+        #save_data_for()
+        print("test complete")

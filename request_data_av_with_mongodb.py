@@ -6,7 +6,6 @@ import json
 import os
 import pymongo
 
-# Connect to MongoDB 
 try:
     client = pymongo.MongoClient("mongodb://localhost:27017")
     print("Connected at mongodb://localhost:27017")
@@ -64,9 +63,10 @@ def save_data_for(ticker="TSCO.LON", my_api_key=my_api_key):
     current_directory = os.getcwd()
     file_name = f'{ticker.replace(".", "_")}.json'
     
-    #---------------------
-    # to add data to DB:
-    collection.insert_one({"_id": file_name, "data": json_data})    
+    collection.update_one({'_id': file_name},
+                          {'$set': {'data': json_data}},
+                          upsert=True)        
+      
     
     file_path = os.path.join(current_directory, "data", file_name )
     
@@ -82,5 +82,5 @@ if __name__ == "__main__":
     if (False):
         main()
     else:
-        #save_data_for()
+        save_data_for()
         print("test complete")

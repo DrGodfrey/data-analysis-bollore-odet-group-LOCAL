@@ -28,7 +28,6 @@ def main(maximum_stock_quote_age=86400):
 
     # If the time elapsed is greater than the maximum allowed age
     if time_elapsed > maximum_stock_quote_age:
-        # Print a message indicating that a new request is being made
         print("A new request is being made.")
         for ticker in ['BOL.PA', 'ODET.PA', 'UMG.AMS', 'VIV.PA']:
             save_data_for(ticker=ticker)        

@@ -21,7 +21,7 @@ my_api_key = alpha_vantage_api_key
 
 def main(mongodb_collection=collection, maximum_stock_quote_age=86400):
     # If the time elapsed is greater than the maximum allowed age
-    if check_time_point(mongodb_collection=mongodb_collection, maximum_stock_quote_age=86400):
+    if check_time_point(mongodb_collection=mongodb_collection, maximum_stock_quote_age=maximum_stock_quote_age):
         # check_time_point handles timestamp validation (and updating) with mongoDB database
         print("A new request is being made.")
         for ticker in ['BOL.PA', 'ODET.PA', 'UMG.AMS', 'VIV.PA']:
@@ -75,7 +75,7 @@ def check_time_point(mongodb_collection=collection, maximum_stock_quote_age=8640
     
 
 if __name__ == "__main__":
-    if (False):
+    if (True):
         main()
     else:
         #For testing functions while (WIP)

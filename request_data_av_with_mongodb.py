@@ -24,10 +24,20 @@ def main(mongodb_collection=collection, maximum_stock_quote_age=86400):
     if check_time_point(mongodb_collection=mongodb_collection, maximum_stock_quote_age=maximum_stock_quote_age):
         # check_time_point handles timestamp validation (and updating) with mongoDB database
         print("A new request is being made.")
-        for ticker in ['BOL.PA', 'ODET.PA', 'UMG.AMS', 'VIV.PA']:
+        for ticker in ['BOL.PA', 'ODET.PA', 'UMG.AMS', 'VIV.PA']: #, 'CAN.LON', 'ALHG.PAR', 'HAVAS.AMS'
             save_data_for(ticker=ticker)
             print(f"updated data for {ticker}")
 
+
+#TODO: also need to implement forex:
+# import requests
+
+# # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+# url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=demo'
+# r = requests.get(url)
+# data = r.json()
+
+# print(data)
     
 def save_data_for(ticker="TSCO.LON", my_api_key=my_api_key, mongodb_collection=collection):
     url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&outputsize=full&apikey={my_api_key}'
@@ -78,6 +88,12 @@ if __name__ == "__main__":
     if (True):
         main()
     else:
+        save_data_for("ALHG.PAR")
+        #ALSO:
+        #CAN.LON
+        #ALHG.PAR
+        #HAVAS.AMS
+        
         #For testing functions while (WIP)
         save_data_for()
         print("test complete")

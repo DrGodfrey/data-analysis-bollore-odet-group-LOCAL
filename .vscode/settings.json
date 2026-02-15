@@ -1,0 +1,10 @@
+"editor.tokenColorCustomizations": {
+  "Monokai Pro": [
+    {
+      "scope": "comment",
+      "settings": {
+        "fontStyle": "bold"
+      }
+    }
+  ]
+}
